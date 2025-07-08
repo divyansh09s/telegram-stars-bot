@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telegram Bot Withdrawal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="max-w-2xl mx-auto mt-10 bg-white p-6 rounded-xl shadow-md">
+    <h2 class="text-2xl font-bold mb-4 text-center text-indigo-600">💸 Withdrawal Portal</h2>
+
+    <!-- User Info -->
+    <div class="mb-4">
+      <p><strong>Username:</strong> @username</p>
+      <p><strong>User ID:</strong> 123456789</p>
+      <p><strong>Balance:</strong> ₹18</p>
+    </div>
+
+    <!-- Withdrawal Form -->
+    <form id="withdrawForm" class="space-y-4 mb-6">
+      <div>
+        <label class="block text-sm font-medium">Amount (Min ₹10)</label>
+        <input type="number" min="10" name="amount" class="w-full px-4 py-2 border rounded-md focus:outline-none" required />
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Your UPI ID</label>
+        <input type="text" name="upi" class="w-full px-4 py-2 border rounded-md focus:outline-none" placeholder="yourupi@bank" required />
+      </div>
+      <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700">Request Withdrawal</button>
+    </form>
+
+    <p id="status" class="text-center text-green-600 text-sm hidden">✅ Withdrawal Request Submitted!</p>
+
+    <!-- Withdrawal History -->
+    <h3 class="text-lg font-semibold mt-8 mb-3 text-gray-800">📜 Withdrawal History</h3>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border rounded">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="py-2 px-4 border">Date</th>
+            <th class="py-2 px-4 border">Amount</th>
+            <th class="py-2 px-4 border">UPI ID</th>
+            <th class="py-2 px-4 border">Status</th>
+          </tr>
+        </thead>
+        <tbody id="historyTable">
+          <tr>
+            <td class="py-2 px-4 border">2025-07-08</td>
+            <td class="py-2 px-4 border">₹15</td>
+            <td class="py-2 px-4 border">abc@upi</td>
+            <td class="py-2 px-4 border text-yellow-600">⏳ Pending</td>
+          </tr>
+          <tr>
+            <td class="py-2 px-4 border">2025-07-06</td>
+            <td class="py-2 px-4 border">₹20</td>
+            <td class="py-2 px-4 border">xyz@upi</td>
+            <td class="py-2 px-4 border text-green-600">✅ Paid</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("withdrawForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const amount = form.amount.value;
+      const upi = form.upi.value;
+
+      if (parseInt(amount) < 10) {
+        alert("Minimum withdrawal amount is ₹10");
+        return;
+      }
+
+      const history = document.getElementById("historyTable");
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td class="py-2 px-4 border">${new Date().toISOString().split("T")[0]}</td>
+        <td class="py-2 px-4 border">₹${amount}</td>
+        <td class="py-2 px-4 border">${upi}</td>
+        <td class="py-2 px-4 border text-yellow-600">⏳ Pending</td>
+      `;
+      history.prepend(row);
+
+      document.getElementById("status").classList.remove("hidden");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
