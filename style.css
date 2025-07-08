@@ -1,0 +1,43 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5ff;
+  color: #333;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+.balance {
+  font-size: 24px;
+  margin: 15px 0;
+}
+.gift-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.gift {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.bronze { background-color: #f9e0b0; }
+.silver { background-color: #d0d0d0; }
+.gold { background-color: #ffd700; }
+.ultimate { background-color: #a29bfe; }
+.withdraw-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  background-color: #6200ea;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
